@@ -1,0 +1,160 @@
+<div class="container m-5">
+    <p-card>
+      <form [formGroup]="form">
+        <div class="form-group  row">
+        <div class="col-sm-4">
+          <label  class="lable_font_weight">Name<span class="text-danger"> *</span></label>
+            <input pInputText type="text"  class="form-control" formControlName="name" placeholder="Name"/>
+            <!-- (onChange)="Selected_dist_Option($event)" formControlName="district_id"  -->
+              <small class="form-text text-danger"
+              *ngIf="!form.get('name').valid && (submitted || form.get('name').dirty || form.get('name').touched)">
+               Name is required</small>
+        </div>
+        <div class="col-sm-4">
+          <label  class="lable_font_weight">Email<span class="text-danger"> *</span></label>
+            <input pInputText type="text"  class="form-control" formControlName="email" placeholder="Email"/>
+              <small class="form-text text-danger"
+              *ngIf="!form.get('email').valid && (submitted || form.get('email').dirty || form.get('email').touched)">
+              Valid Email is required</small>
+        </div>
+        <div class="col-sm-4">
+          <label  class="lable_font_weight">Address<span class="manditory"> *</span></label>
+          <textarea rows="3" cols="12" class="form-control" formControlName="address"  placeholder="Address 1" pInputTextarea></textarea>
+              <small class="form-text text-danger"
+              *ngIf="!form.get('address').valid && (submitted || form.get('address').dirty || form.get('address').touched)">
+              Address  is required</small>
+        </div>
+      </div><hr/>
+      <div class="form-group row">
+        <div class="col-sm-4">
+            <label class="lable_font_weight">Country<span class="text-danger"> *</span></label>
+            <div class="col-sm-8">
+              <p-dropdown [options]="allcountryopvalueoptions" formControlName="country" (onChange)="country_id($event)" placeholder="Select"></p-dropdown>
+              <small class="form-text text-danger"
+                *ngIf="!form.get('country').valid && (submitted || form.get('country').dirty || form.get('country').touched)">
+                Country is required</small>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label  class="lable_font_weight">State<span class="text-danger"> *</span></label>
+            <div class="col-sm-8">
+                <p-dropdown [options]="allstatedropvalueoptions" [disabled]="!state_c" formControlName="state" (onChange)="state_id($event)"  placeholder="Select"></p-dropdown>
+                <small class="form-text text-danger"
+                *ngIf="!form.get('state').valid && (submitted || form.get('state').dirty || form.get('state').touched)">
+                State  is required</small>                      
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label  class="lable_font_weight">City<span class="text-danger"> *</span></label>
+            <div class="col-sm-8">
+                <p-dropdown [options]="allcitydropvalueoptions" [disabled]="!city_c"  formControlName="city" placeholder="Select"></p-dropdown>
+                <small class="form-text text-danger"
+                *ngIf="!form.get('city').valid && (submitted || form.get('city').dirty || form.get('city').touched)">
+                City is required</small>
+            </div>
+        </div>
+    </div><hr/>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <label  class="lable_font_weight pr-3">Preferred Locations<span class="text-danger"> *</span></label>
+      </div>
+      <div class="col-sm-3">
+        <p-checkbox name="groupname" value="Chennai" [formControl]="form.controls['cities']"  inputId="chennai"></p-checkbox>
+        <label class="pl-2" for="ny">Chennai</label>
+      </div>
+      <div class="col-sm-3">
+        <p-checkbox name="groupname" value="Mumbai" [formControl]="form.controls['cities']" inputId="mumbai"></p-checkbox>
+        <label class="pl-2" for="ny">Mumbai</label>
+      </div>
+      <div class="col-sm-3">
+        <p-checkbox name="groupname" value="Delhi" [formControl]="form.controls['cities']"  inputId="delhi"></p-checkbox>
+        <label class="pl-2" for="ny">Delhi</label>
+      </div>
+      <div class="col-sm-3">
+        <p-checkbox name="groupname" value="Banglore" [formControl]="form.controls['cities']"  inputId="Banglore"></p-checkbox>
+        <label class="pl-2" for="ny">Bangalore</label>
+      </div>
+    </div><hr/>
+    <div class="form-group row">
+      <div class="col-sm-6 row">
+        <div class="col-sm-4">
+          <label class="pt-3">Are You Experienced ?</label>
+        </div>
+      <div class="col-sm-8 row pl-4 pt-3">
+        <div class="col-sm-6"> 
+          <p-radioButton name="gender"  value="Yes" label="Yes" formControlName="exprence" (click)="Choose_exprence(form.value.exprence)" inputId="opt1"></p-radioButton>
+        </div>
+        <div class="col-sm-6">
+            <p-radioButton name="gender"  value="No" label="No" formControlName="exprence" (click)="Choose_exprence(form.value.exprence)" inputId="opt1"></p-radioButton>
+        </div>
+        <small class="form-text text-danger"
+        *ngIf="!form.get('exprence').valid && (submitted || form.get('exprence').dirty || form.get('exprence').touched)">
+        Filed is required</small>
+      </div>  
+      </div>
+      <div class="col-sm-6 row pt-3">
+        <div class="col-sm-6">
+          <label class="">Years of Experience</label>
+        </div>
+        <div class="col-sm-6">
+          <input pInputText type="text" formControlName="yrs_exp" class="form-control" placeholder="Years" maxlength="4"/>
+          <small class="form-text text-danger"
+            *ngIf="!form.get('yrs_exp').valid && (submitted || form.get('yrs_exp').dirty || form.get('yrs_exp').touched)">
+            Experience is required</small>
+        </div>
+      </div>
+    </div><hr/>
+    <p-panel header="Skills">
+      <div class="row p-2">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3 row">
+          <div class="col-sm-6"> 
+          <button type="button" (click)="add_skill()" class="btn btn-info">ADD</button>
+          </div>
+        <div class="col-sm-6"> 
+          <button type="button" (click)="remove_skill()"  class="btn btn-info">Remove</button>
+        </div>
+  
+        </div>
+      </div>
+      <div formArrayName="skills_array">
+        <div class="form-group row p-3" style="padding-bottom:10px" *ngFor="let item of form.get('skills_array')['controls']; let i = index;" [formGroupName]="i">
+        <div class="col-sm-4">
+          <label  class="lable_font_weight">Skill Name<span class="text-danger"> *</span></label>
+            <input pInputText type="text"  class="form-control col-sm-8" formControlName="sk_name"  placeholder="example: c#, angular, java"/>
+            <small class="form-text text-danger"
+                *ngIf="item.controls.sk_name.errors && (submitted || invalid_skill || form.controls.sk_name.dirty || form.controls.sk_name.touched)">
+                 Skill is required
+            </small>
+        </div>
+        <div class="col-sm-4">
+          <label  class="lable_font_weight">Descripition<span class="text-danger"> *</span></label>
+            <textarea rows="3" cols="12" class="form-control" formControlName="sk_desc"  placeholder="example: project done of above select sill or any courses on the above-mentioned skill set" pInputTextarea></textarea>
+            <small class="form-text text-danger"
+                *ngIf="item.controls.sk_desc.errors && (submitted || invalid_skill || form.controls.sk_desc.dirty || form.controls.sk_desc.touched)">
+                 Descripition is required
+            </small>
+        </div>
+        <div class="col-sm-4">
+          <label class="lable_font_weight">Skill Level<span class="text-danger"> *</span></label>
+          <div class="col-sm-8">
+            <p-dropdown [options]="skill_level" formControlName="sk_level" (onChange)="StudentVerificationType($event)" placeholder="Select"></p-dropdown>
+            <small class="form-text text-danger"
+                *ngIf="item.controls.sk_level.errors && (submitted || invalid_skill || form.controls.sk_level.dirty || form.controls.sk_level.touched)">
+                 Level is required
+            </small>
+          </div>
+      </div>
+      </div>
+      </div>
+      <hr/>
+    </p-panel>
+  </form>
+    <div class="text-right mt-3">
+        <button type="button" (click)="save()" pButton icon="pi pi-check" label="Submit"></button>
+    </div>
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+      
+
+    </p-card>
+    </div>
