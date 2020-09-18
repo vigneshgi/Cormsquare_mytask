@@ -58,22 +58,18 @@
       <div class="col-sm-12">
         <label  class="lable_font_weight pr-3">Preferred Locations<span class="text-danger"> *</span></label>
       </div>
-      <div class="col-sm-3">
-        <p-checkbox name="groupname" value="Chennai" [formControl]="form.controls['cities']"  inputId="chennai"></p-checkbox>
-        <label class="pl-2" for="ny">Chennai</label>
+      <div class="col-sm-12 row">
+        <div *ngFor="let category of categories" class="p-field-checkbox">
+          <div class="col-sm-12 row p-3">
+              <div class="col-sm-6">
+                <p-checkbox name="group2" value="category" [(ngModel)]="selectedCategories"  [formControl]="form.controls['cities']"  [inputId]="category.value"  [value]="category" ></p-checkbox>
+              </div>
+              <div class="col-sm-6">
+                <label [for]="category.value">{{category.label}}</label>
+              </div>
+          </div>
       </div>
-      <div class="col-sm-3">
-        <p-checkbox name="groupname" value="Mumbai" [formControl]="form.controls['cities']" inputId="mumbai"></p-checkbox>
-        <label class="pl-2" for="ny">Mumbai</label>
-      </div>
-      <div class="col-sm-3">
-        <p-checkbox name="groupname" value="Delhi" [formControl]="form.controls['cities']"  inputId="delhi"></p-checkbox>
-        <label class="pl-2" for="ny">Delhi</label>
-      </div>
-      <div class="col-sm-3">
-        <p-checkbox name="groupname" value="Banglore" [formControl]="form.controls['cities']"  inputId="Banglore"></p-checkbox>
-        <label class="pl-2" for="ny">Bangalore</label>
-      </div>
+    </div>
     </div><hr/>
     <div class="form-group row">
       <div class="col-sm-6 row">
@@ -138,7 +134,7 @@
         <div class="col-sm-4">
           <label class="lable_font_weight">Skill Level<span class="text-danger"> *</span></label>
           <div class="col-sm-8">
-            <p-dropdown [options]="skill_level" formControlName="sk_level" (onChange)="StudentVerificationType($event)" placeholder="Select"></p-dropdown>
+            <p-dropdown [options]="skill_level" formControlName="sk_level" placeholder="Select"></p-dropdown>
             <small class="form-text text-danger"
                 *ngIf="item.controls.sk_level.errors && (submitted || invalid_skill || form.controls.sk_level.dirty || form.controls.sk_level.touched)">
                  Level is required

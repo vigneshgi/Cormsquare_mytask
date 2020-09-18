@@ -20,14 +20,15 @@ export class FormDataComponent implements OnInit {
   state_c  = false ;
   city_c: boolean;
   submitted: boolean;
-  
+  categories: { label: string; value: string; }[];
+  selectedCategories: any[] = [];
+
 
   constructor(public fb :FormBuilder, public formdataService : FormdataService,private confirmationService: ConfirmationService) { 
    
   }
 
   ngOnInit() {
-  
    this.all_counrty_dropdown();
    this.skill_level = [
     {label: 'Beginner', value: "Beginner"},
@@ -35,7 +36,13 @@ export class FormDataComponent implements OnInit {
     {label: 'Advanced', value: "Advanced"},
     {label: 'Expert', value: "Expert"},
     ];
-
+    this.categories =[
+      {label: 'Mumbai', value: "Mumbai"},
+      {label: 'Chennai', value: "Chennai"},
+      {label: 'Delhi', value: "Delhi"},
+      {label: 'Bangalore', value: "Bangalore"},
+    ]
+    this.selectedCategories = this.categories.slice(0,1); 
     this.form = this.fb.group({
       'skills_array': new FormArray([this.createitem_skill(1)]),
             'email': new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z0-9.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}")]),
@@ -46,7 +53,7 @@ export class FormDataComponent implements OnInit {
             'city': new FormControl('',Validators.required),
             'exprence':  new FormControl('',Validators.required),
             'yrs_exp':  new FormControl('',null),
-            'cities':  new FormControl('Mumbai',null),
+            'cities':  new FormControl('',null),
             'sk_name': new FormControl('',null),
             'sk_desc':  new FormControl('',null),
             'sk_level': new FormControl('',null),
@@ -166,7 +173,7 @@ export class FormDataComponent implements OnInit {
       this.submitted = true;
       if (this.form.valid) { 
         this.confirmationService.confirm({
-          message: 'Are you sure that you want to perform this action?',
+          message: 'Are you sure you want to submit the employee data?',
           accept: () => {
             console.log("Submitted Value",this.form.value);          
           }
