@@ -14,7 +14,7 @@ Ng serve
 Runs the app in development mode.
 
 Date: 2020-09-18T05:27:02.213Z - Hash: 6f594544ca0591018da2 - Time: 24928ms
-** Angular Live Development Server is listening on localhost:5000, open your browser on http://localhost:5000/ **
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:5000/ **
 ℹ ｢wdm｣: Compiled successfully.
 
 It will Run in Local Machine.
