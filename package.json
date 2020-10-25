@@ -1,9 +1,12 @@
 {
   "name": "my-app",
   "version": "0.0.0",
+  "engines": {
+    "node": "12.11.1"
+    },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node index.js", 
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
