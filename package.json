@@ -4,14 +4,14 @@
   "engines": {
     "node": "12.11.1"
     },
-  "scripts": {
-    "ng": "ng",
-    "start": "node index.js", 
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
+"scripts": {
+"dev": "react-scripts start",
+"start": "serve -s build",
+"build": "react-scripts build",
+"test": "react-scripts test --env=jsdom",
+"eject": "react-scripts eject",
+"heroku-postbuild": "npm run build"
+}
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.2.14",
